@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appraiser Portal — AMC Encore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root { --accent: var(--blue); --accent-soft: rgba(58,91,181,.09); }
+
+    .portal-hero {
+      position: relative; z-index: 1;
+      min-height: 52vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+      gap: 1.2rem;
+      overflow: hidden;
+    }
+
+    .portal-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(58,91,181,.15) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    .portal-icon-large {
+      position: relative; z-index: 2;
+      width: 90px; height: 90px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-lt) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 12px 40px rgba(58,91,181,.30), 0 4px 12px rgba(58,91,181,.20);
+      animation: floatIcon 4s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    .portal-hero h1, .portal-hero .lead, .portal-hero .hero-btns { position: relative; z-index: 2; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .feat-card {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: var(--r-lg);
+      padding: 1.9rem 1.6rem;
+      box-shadow: var(--shadow-card);
+      transition: transform .3s cubic-bezier(.34,1.5,.64,1), box-shadow .3s;
+    }
+    .feat-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+    .feat-icon { font-size: 1.5rem; margin-bottom: .8rem; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--accent-soft); }
+    .feat-card h3 { font-family: var(--font-head); font-size: .95rem; font-weight: 700; margin-bottom: .4rem; }
+    .feat-card p  { font-size: .83rem; color: var(--muted); line-height: 1.65; }
+
+    .login-card {
+      max-width: 480px;
+      margin: 3rem auto 0;
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: var(--r-xl);
+      padding: 2.75rem 2.5rem;
+      box-shadow: var(--shadow-hover);
+      text-align: center;
+    }
+
+    .login-card h2 { font-family: var(--font-head); font-size: 1.4rem; font-weight: 800; margin-bottom: .4rem; }
+    .login-card p  { font-size: .88rem; color: var(--muted); margin-bottom: 2rem; }
+
+    .login-btn {
+      display: block;
+      width: 100%;
+      padding: .9rem;
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: .95rem;
+      font-weight: 650;
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: .9rem;
+      transition: transform .22s, box-shadow .22s;
+    }
+
+    .login-btn-primary {
+      background: var(--blue);
+      color: white;
+      box-shadow: var(--shadow-btn);
+    }
+    .login-btn-primary:hover { background: var(--blue-dk); transform: translateY(-2px); box-shadow: var(--shadow-btn-hover); }
+
+    .login-btn-outline {
+      background: transparent;
+      color: var(--blue);
+      border: 2px solid rgba(58,91,181,.25);
+    }
+    .login-btn-outline:hover { background: rgba(58,91,181,.05); transform: translateY(-2px); }
+
+    .login-divider { display: flex; align-items: center; gap: .75rem; margin: 1.25rem 0; color: var(--muted); font-size: .8rem; }
+    .login-divider::before, .login-divider::after { content: ''; flex: 1; height: 1px; background: rgba(58,91,181,.1); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html"><img src="https://i0.wp.com/amcencore.com/wp-content/uploads/2026/02/Encore-AMC.jpg" alt="AMC Encore" class="nav-logo" /></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="technology.html">Technology</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <section class="portal-hero">
+    <div class="portal-icon-large">🏠</div>
+    <div class="eyebrow" style="position:relative;z-index:2">Appraiser Portal</div>
+    <h1 class="display" style="max-width:640px">Your Work. <span class="grad-text">Your Way.</span></h1>
+    <p class="lead" style="max-width:500px; margin:0 auto">Accept orders, submit reports, track payments, and manage your profile — all from one clean dashboard.</p>
+    <div class="hero-btns" style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; position:relative; z-index:2; margin-top:.5rem">
+      <a href="#login" class="btn btn-primary">Log In to Portal</a>
+      <a href="contact.html" class="btn btn-outline">Register / Get Help</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div style="text-align:center" class="reveal">
+      <div class="eyebrow">Portal Features</div>
+      <h2 class="section-title">Everything You Need</h2>
+    </div>
+    <div class="feature-grid stagger">
+      <div class="feat-card reveal">
+        <div class="feat-icon">📋</div>
+        <h3>Order Management</h3>
+        <p>View, accept, and manage all active orders with real-time status tracking and deadline alerts.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">📤</div>
+        <h3>Report Submission</h3>
+        <p>Upload completed reports directly, attach addenda, and receive instant QC feedback.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">💳</div>
+        <h3>Payment Tracking</h3>
+        <p>View invoices, payment history, and upcoming disbursements in one transparent dashboard.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon">👤</div>
+        <h3>Profile Management</h3>
+        <p>Keep your credentials, E&O coverage, and license information current and up to date.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section--light" style="padding:4rem 1.5rem" id="login">
+    <div class="login-card reveal">
+      <h2>Appraiser Login</h2>
+      <p>Access your orders, reports, and payment history.</p>
+      <a href="https://amcencore.com" class="login-btn login-btn-primary">Log In to Appraiser Portal</a>
+      <div class="login-divider">or</div>
+      <a href="contact.html" class="login-btn login-btn-outline">Apply to Join Our Panel</a>
+      <p style="margin-top:1.25rem; font-size:.78rem; color:var(--muted)">
+        Need help? Email <a href="mailto:info@amcencore.com" style="color:var(--blue)">info@amcencore.com</a>
+        or call <a href="tel:9139375577" style="color:var(--blue)">913-937-5577</a>
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img src="https://i0.wp.com/amcencore.com/wp-content/uploads/2026/02/Encore-AMC.jpg" alt="AMC Encore" class="footer-logo" />
+        <p class="footer-desc">Nationwide appraisal management built for the modern mortgage industry.</p>
+        <div class="footer-contact-item"><span>📞</span><span>913-937-5577</span></div>
+        <div class="footer-contact-item"><span>✉️</span><span>info@amcencore.com</span></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Portals</div>
+        <ul>
+          <li><a href="appraiser-portal.html">Appraiser</a></li>
+          <li><a href="lender-portal.html">Lender</a></li>
+          <li><a href="broker-portal.html">Broker</a></li>
+          <li><a href="amc-portal.html">AMC</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="mailto:compliance@amcencore.com">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 AMC Encore. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">SMS Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+  <!-- Tawk.to Live Chat: replace YOUR_PROPERTY_ID/YOUR_WIDGET_ID after signing up at tawk.to -->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src="https://embed.tawk.to/YOUR_PROPERTY_ID/YOUR_WIDGET_ID";
+      s1.charset="UTF-8";
+      s1.setAttribute("crossorigin","*");
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+</body>
+</html>

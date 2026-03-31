@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMC Encore — Your Valuation Solution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 96vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 5rem;
+      gap: 1.75rem;
+      overflow: hidden;
+    }
+
+    /* Floating particle dots */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(58,91,181,.18) 1px, transparent 1px),
+        radial-gradient(circle, rgba(245,166,35,.12) 1px, transparent 1px);
+      background-size: 52px 52px, 80px 80px;
+      background-position: 0 0, 26px 26px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(58,91,181,.08);
+      border: 1.5px solid rgba(58,91,181,.2);
+      color: var(--blue-lt);
+      font-family: var(--font-body);
+      font-size: .73rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .4rem 1rem;
+      border-radius: 99px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(61,196,92,.2);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .3; }
+    }
+
+    /* ── 3D LOGO CONTAINER ── */
+    .logo-3d-wrap {
+      position: relative;
+      z-index: 2;
+      margin: .25rem 0;
+      animation: float3d 5s ease-in-out infinite;
+      perspective: 1000px;
+    }
+
+    @keyframes float3d {
+      0%   { transform: translateY(0px)   rotateX(2deg) rotateY(-3deg); }
+      25%  { transform: translateY(-8px)  rotateX(0deg) rotateY(2deg); }
+      50%  { transform: translateY(-14px) rotateX(-2deg) rotateY(4deg); }
+      75%  { transform: translateY(-8px)  rotateX(-1deg) rotateY(-1deg); }
+      100% { transform: translateY(0px)   rotateX(2deg) rotateY(-3deg); }
+    }
+
+    /* White card bubble that clips the logo cleanly */
+    .logo-bubble {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 2px 0 rgba(255,255,255,.9) inset,
+        0 8px 24px rgba(58,91,181,.14),
+        0 24px 60px rgba(58,91,181,.12),
+        0 40px 100px rgba(58,91,181,.07);
+    }
+
+    .hero-logo {
+      width: min(300px, 58vw);
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* Ground shadow */
+    .logo-shadow {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 65%;
+      height: 20px;
+      background: radial-gradient(ellipse, rgba(58,91,181,.20) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: shadowPulse 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shadowPulse {
+      0%,100% { transform: translateX(-50%) scaleX(1);   opacity: .65; }
+      50%      { transform: translateX(-50%) scaleX(.72); opacity: .30; }
+    }
+
+    /* ── HERO TEXT ── */
+    .hero h1 {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero .lead {
+      position: relative;
+      z-index: 2;
+      margin: 0 auto;
+      max-width: 540px;
+    }
+
+    .hero-btns {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* ── SCROLL CUE ── */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .6;
+      animation: fadeInUp 1s .8s both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, transparent, var(--blue));
+      animation: scrollDrop 1.6s ease-in-out infinite;
+    }
+
+    @keyframes scrollDrop {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+      40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      60%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: .6; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--blue-dk) 0%, var(--blue) 50%, var(--blue-lt) 100%);
+      padding: 3rem 2rem;
+      overflow: hidden;
+    }
+
+    .stats-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .stats-inner {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .stat-block {
+      text-align: center;
+      padding: 1rem;
+      border-right: 1px solid rgba(255,255,255,.12);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-block .stat-number { color: white; }
+
+    /* ── PORTAL SECTION ── */
+    .portals-section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .portals-section .section-head { text-align: center; margin-bottom: 3rem; }
+
+    .portals-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .portal-card {
+      position: relative;
+      background: var(--surface);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: var(--r-lg);
+      padding: 2.25rem 1.75rem 1.9rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,.7);
+      transition: transform .35s cubic-bezier(.34,1.5,.64,1), box-shadow .35s;
+      overflow: hidden;
+    }
+
+    /* Top accent bar */
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      background: var(--ac);
+    }
+
+    /* Background orb */
+    .portal-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; right: -30px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: var(--ac);
+      opacity: .06;
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+
+    .portal-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+    }
+    .portal-card:hover::after { opacity: .13; transform: scale(1.3); }
+
+    .portal-icon {
+      width: 54px; height: 54px;
+      border-radius: 15px;
+      background: color-mix(in srgb, var(--ac) 12%, transparent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      transition: transform .3s cubic-bezier(.34,1.5,.64,1);
+    }
+    .portal-card:hover .portal-icon { transform: scale(1.2) rotate(-6deg); }
+
+    .portal-name {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .portal-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .portal-cta {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .82rem;
+      font-weight: 650;
+      color: var(--ac);
+      margin-top: .3rem;
+      font-family: var(--font-body);
+      transition: gap .22s;
+    }
+    .portal-card:hover .portal-cta { gap: .85rem; }
+
+    .portal-card--appraiser { --ac: var(--blue); }
+    .portal-card--lender    { --ac: var(--orange); }
+    .portal-card--broker    { --ac: var(--pink); }
+    .portal-card--amc       { --ac: var(--green); }
+
+    /* ── ABOUT SPLIT ── */
+    .about-split {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(145deg, rgba(255,255,255,.65), rgba(255,255,255,.45));
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,.6);
+      border-bottom: 1px solid rgba(58,91,181,.07);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 8rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: center;
+    }
+
+    .about-quote {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      border-left: 3px solid var(--blue-lt);
+      padding: 1.1rem 1.5rem;
+      background: rgba(58,91,181,.04);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      margin: 1.5rem 0;
+      font-style: italic;
+    }
+
+    .feature-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .feature-pill {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      padding: 1.1rem 1.1rem;
+      background: rgba(255,255,255,.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: var(--r-md);
+      box-shadow: var(--shadow-card);
+      transition: transform .25s cubic-bezier(.34,1.5,.64,1), box-shadow .25s;
+    }
+    .feature-pill:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(20,28,53,.10); }
+
+    .fp-icon {
+      font-size: 1.3rem;
+      width: 40px; height: 40px;
+      min-width: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .fp-title { font-family: var(--font-head); font-size: .85rem; font-weight: 700; margin-bottom: .2rem; }
+    .fp-desc  { font-size: .77rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── TEAM ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .team-card {
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: var(--r-lg);
+      padding: 1.75rem 1.5rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: transform .35s cubic-bezier(.34,1.5,.64,1), box-shadow .35s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--sky));
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .team-card:hover::before { opacity: 1; }
+    .team-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+
+    .team-photo-wrap {
+      width: 96px; height: 96px;
+      border-radius: 18px;
+      margin: 0 auto 1.1rem;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 6px 24px rgba(58,91,181,.18);
+      border: 3px solid rgba(255,255,255,.9);
+      background: linear-gradient(135deg, rgba(58,91,181,.12), rgba(41,182,246,.08));
+    }
+
+    .team-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .team-card:hover .team-photo { transform: scale(1.06); }
+
+    /* Fallback initials shown when no photo */
+    .team-photo-wrap .initials {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--blue-lt);
+      letter-spacing: -.02em;
+      font-family: var(--font-head);
+    }
+
+    .team-name  { font-size: 1rem; font-weight: 700; margin-bottom: .2rem; letter-spacing: -.01em; }
+    .team-role  { font-size: .75rem; color: var(--blue-lt); font-weight: 600; margin-bottom: .5rem; line-height: 1.4; }
+    .team-phone {
+      font-size: .78rem; color: var(--muted);
+      display: inline-flex; align-items: center; gap: .35rem;
+    }
+    .team-phone::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+    /* ── LENDERS ── */
+    .lenders-strip {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(145deg, rgba(255,255,255,.65), rgba(255,255,255,.45));
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,.6);
+      border-bottom: 1px solid rgba(58,91,181,.07);
+      padding: 5.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .lenders-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .9rem;
+      max-width: 900px;
+      margin: 2.5rem auto 0;
+    }
+
+    .lender-badge {
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: var(--r-md);
+      padding: .75rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: var(--shadow-card);
+      transition: transform .25s cubic-bezier(.34,1.5,.64,1), box-shadow .25s;
+    }
+    .lender-badge:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(20,28,53,.10); }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      position: relative;
+      z-index: 1;
+      margin: 0 1.5rem 5rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: var(--r-xl);
+      background: linear-gradient(135deg, var(--blue-dk) 0%, var(--blue) 45%, #5B8DEF 100%);
+      padding: 4rem 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(58,91,181,.3);
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      pointer-events: none;
+    }
+
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: 120px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+      pointer-events: none;
+    }
+
+    .cta-text { position: relative; z-index: 1; }
+    .cta-text h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: white;
+      margin-bottom: .5rem;
+      letter-spacing: -.025em;
+    }
+    .cta-text p { font-size: .95rem; color: rgba(255,255,255,.7); max-width: 440px; line-height: 1.7; }
+
+    .cta-actions { position: relative; z-index: 1; display: flex; gap: .9rem; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .portals-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid    { grid-template-columns: repeat(2, 1fr); }
+      .about-inner  { grid-template-columns: 1fr; gap: 3rem; }
+      .cta-banner   { flex-direction: column; text-align: center; }
+      .cta-text p   { margin: 0 auto; }
+    }
+
+    @media (max-width: 540px) {
+      .portals-grid    { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .feature-pills   { grid-template-columns: 1fr; }
+      .stats-inner     { grid-template-columns: 1fr; }
+      .stat-block      { border-right: none; border-bottom: 1px solid rgba(255,255,255,.12); }
+      .stat-block:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 380px) {
+      .portals-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="index.html">
+      <img src="https://i0.wp.com/amcencore.com/wp-content/uploads/2026/02/Encore-AMC.jpg" alt="AMC Encore" class="nav-logo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="technology.html">Technology</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Nationwide Appraisal Services
+    </div>
+
+    <!-- 3D Floating Logo -->
+    <div class="logo-3d-wrap">
+      <div class="logo-bubble">
+        <img
+          src="https://i0.wp.com/amcencore.com/wp-content/uploads/2026/02/Encore-AMC.jpg"
+          alt="AMC Encore"
+          class="hero-logo"
+        />
+      </div>
+      <div class="logo-shadow"></div>
+    </div>
+
+    <h1 class="display">
+      Your <span class="grad-text">Valuation</span> Solution
+    </h1>
+    <p class="lead">
+      Nationwide appraisal services powered by predictive analytics, an elite panel, and a team committed to excellence — in every order, every time.
+    </p>
+    <div class="hero-btns">
+      <a href="#portals" class="btn btn-primary">Select Your Portal ↓</a>
+    </div>
+
+    <div class="scroll-cue">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- ══ STATS ══ -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat-block reveal">
+        <div class="stat-number" data-count="98" data-suffix="%">98%</div>
+        <div class="stat-label">On-Time Delivery</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-number" data-count="5" data-suffix=" Days">5 Days</div>
+        <div class="stat-label">Avg Turn-Time</div>
+      </div>
+      <div class="stat-block reveal">
+        <div class="stat-number" data-count="2" data-suffix=" Hrs">2 Hrs</div>
+        <div class="stat-label">Accept to Schedule</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PORTALS ══ -->
+  <section class="portals-section" id="portals">
+    <div class="section-head reveal">
+      <div class="eyebrow">Select Your Portal</div>
+      <h2 class="section-title">Where would you like to go?</h2>
+      <p class="lead" style="margin:.65rem auto 0">Choose your user type to access your dedicated workspace.</p>
+    </div>
+
+    <div class="portals-grid stagger">
+
+      <a href="appraiser-portal.html" class="portal-card portal-card--appraiser reveal">
+        <div class="portal-icon">🏠</div>
+        <div class="portal-name">Appraiser</div>
+        <p class="portal-desc">Accept orders, submit reports, track payments, and manage your panel profile.</p>
+        <div class="divider"></div>
+        <div class="portal-cta">
+          Enter Portal
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
+      </a>
+
+      <a href="lender-portal.html" class="portal-card portal-card--lender reveal">
+        <div class="portal-icon">🏦</div>
+        <div class="portal-name">Lender</div>
+        <p class="portal-desc">Place orders, monitor status in real time, review reports, and manage billing.</p>
+        <div class="divider"></div>
+        <div class="portal-cta">
+          Enter Portal
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
+      </a>
+
+      <a href="broker-portal.html" class="portal-card portal-card--broker reveal">
+        <div class="portal-icon">🤝</div>
+        <div class="portal-name">Broker</div>
+        <p class="portal-desc">Submit loan files, track appraisal progress, and collaborate with lending partners.</p>
+        <div class="divider"></div>
+        <div class="portal-cta">
+          Enter Portal
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
+      </a>
+
+      <a href="amc-portal.html" class="portal-card portal-card--amc reveal">
+        <div class="portal-icon">⚙️</div>
+        <div class="portal-name">AMC</div>
+        <p class="portal-desc">Manage the full workflow, oversee the appraiser panel, and ensure compliance.</p>
+        <div class="divider"></div>
+        <div class="portal-cta">
+          Enter Portal
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ══ ABOUT SPLIT ══ -->
+  <div class="about-split">
+    <div class="about-inner">
+      <div class="reveal">
+        <div class="eyebrow">The Encore Difference</div>
+        <h2 class="section-title">Why Encore? <span class="grad-text">Why Now?</span></h2>
+        <blockquote class="about-quote">
+          "The valuation industry is undergoing the largest, most disruptive transition in history. Who you choose to partner with today will make all the difference in your business tomorrow."
+        </blockquote>
+        <p style="font-size:.92rem; color:var(--muted); line-height:1.8">
+          AMCs have been consolidated by private equity companies focused solely on profits — not performance and quality. Qualified appraiser numbers are shrinking, UAD 3.6 and new URAR forms are reshaping the industry. Encore was built differently.
+        </p>
+        <div style="display:flex; gap:.9rem; flex-wrap:wrap; margin-top:2rem">
+          <a href="about.html" class="btn btn-primary">Our Story</a>
+          <a href="products.html" class="btn btn-outline">View Services</a>
+        </div>
+      </div>
+      <div class="feature-pills stagger">
+        <div class="feature-pill reveal">
+          <div class="fp-icon" style="background:rgba(58,91,181,.09)">🎯</div>
+          <div>
+            <div class="fp-title">Predictive Matching</div>
+            <div class="fp-desc">Millions of data points assign the best appraiser to every order.</div>
+          </div>
+        </div>
+        <div class="feature-pill reveal">
+          <div class="fp-icon" style="background:rgba(41,182,246,.09)">🔒</div>
+          <div>
+            <div class="fp-title">Compliance First</div>
+            <div class="fp-desc">USPAP-aligned QC at every step — handled by credentialed appraisers.</div>
+          </div>
+        </div>
+        <div class="feature-pill reveal">
+          <div class="fp-icon" style="background:rgba(245,166,35,.09)">⚡</div>
+          <div>
+            <div class="fp-title">Industry-Leading Speed</div>
+            <div class="fp-desc">Fastest turnaround times without ever sacrificing report quality.</div>
+          </div>
+        </div>
+        <div class="feature-pill reveal">
+          <div class="fp-icon" style="background:rgba(67,196,95,.09)">🌐</div>
+          <div>
+            <div class="fp-title">All 50 States</div>
+            <div class="fp-desc">Nationwide coverage for every loan type and every property type.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TEAM ══ -->
+  <section class="section" id="team">
+    <div style="text-align:center" class="reveal">
+      <div class="eyebrow">Leadership</div>
+      <h2 class="section-title">Powered by Our People</h2>
+      <p class="lead" style="margin:.65rem auto 0">Experienced appraisers and industry veterans behind every client relationship.</p>
+    </div>
+    <div class="team-grid stagger">
+      <div class="team-card reveal">
+        <div class="team-photo-wrap">
+          <!-- Replace PHOTO_URL_JORDAN with the actual image URL from amcencore.com -->
+          <img src="PHOTO_URL_JORDAN" alt="Jordan Chapman" class="team-photo" onerror="this.style.display='none'" />
+          <div class="initials">JC</div>
+        </div>
+        <div class="team-name">Jordan Chapman</div>
+        <div class="team-role">President, Sales · Certified Appraiser</div>
+        <div class="team-phone">913-934-5692</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo-wrap">
+          <!-- Replace PHOTO_URL_SAM with the actual image URL from amcencore.com -->
+          <img src="PHOTO_URL_SAM" alt="Sam Grashoff" class="team-photo" onerror="this.style.display='none'" />
+          <div class="initials">SG</div>
+        </div>
+        <div class="team-name">Sam Grashoff</div>
+        <div class="team-role">President, Operations</div>
+        <div class="team-phone">913-226-7716</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo-wrap">
+          <!-- Replace PHOTO_URL_EMMA with the actual image URL from amcencore.com -->
+          <img src="PHOTO_URL_EMMA" alt="Emma Henderson" class="team-photo" onerror="this.style.display='none'" />
+          <div class="initials">EH</div>
+        </div>
+        <div class="team-name">Emma Henderson</div>
+        <div class="team-role">VP Client Relations · Certified Appraiser</div>
+        <div class="team-phone">913-934-5719</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo-wrap">
+          <!-- Replace PHOTO_URL_ELENA with the actual image URL from amcencore.com -->
+          <img src="PHOTO_URL_ELENA" alt="Elena Marogy" class="team-photo" onerror="this.style.display='none'" />
+          <div class="initials">EM</div>
+        </div>
+        <div class="team-name">Elena Marogy</div>
+        <div class="team-role">VP Client Relations</div>
+        <div class="team-phone">913-934-5760</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ LENDERS ══ -->
+  <div class="lenders-strip">
+    <div class="reveal">
+      <div class="eyebrow">Trusted Partners</div>
+      <h2 class="section-title">The Nation's Top Lenders Choose Encore</h2>
+      <p class="lead" style="margin:.65rem auto 0">Partnered with the country's most respected wholesale and retail lenders.</p>
+    </div>
+    <div class="marquee-track">
+      <div class="marquee-inner">
+        <!-- first set -->
+        <div class="marquee-badge">United Wholesale Mortgage</div>
+        <div class="marquee-badge">PRMG</div>
+        <div class="marquee-badge">Longbridge Financial</div>
+        <div class="marquee-badge">HomeXpress Mortgage</div>
+        <div class="marquee-badge">A&amp;D Mortgage</div>
+        <div class="marquee-badge">Acra Lending</div>
+        <div class="marquee-badge">Click n Close</div>
+        <div class="marquee-badge">Champions Funding</div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-badge">United Wholesale Mortgage</div>
+        <div class="marquee-badge">PRMG</div>
+        <div class="marquee-badge">Longbridge Financial</div>
+        <div class="marquee-badge">HomeXpress Mortgage</div>
+        <div class="marquee-badge">A&amp;D Mortgage</div>
+        <div class="marquee-badge">Acra Lending</div>
+        <div class="marquee-badge">Click n Close</div>
+        <div class="marquee-badge">Champions Funding</div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap">
+      <a href="contact.html" class="btn btn-primary">Become a Partner</a>
+      <a href="products.html" class="btn btn-outline">View All Services</a>
+    </div>
+  </div>
+
+  <!-- ══ CTA BANNER ══ -->
+  <div style="position:relative; z-index:1; padding: 5rem 1.5rem 0;">
+    <div class="cta-banner reveal">
+      <div class="cta-text">
+        <h2>Ready to Place an Order?</h2>
+        <p>Discover the AMC Encore difference — where quality and customer satisfaction take precedence in every transaction.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-white">Order an Appraisal</a>
+        <a href="technology.html" class="btn" style="background:rgba(255,255,255,.12); color:white; border:1.5px solid rgba(255,255,255,.3)">Our Technology</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img src="https://i0.wp.com/amcencore.com/wp-content/uploads/2026/02/Encore-AMC.jpg" alt="AMC Encore" class="footer-logo" />
+        <p class="footer-desc">Nationwide appraisal management built for the modern mortgage industry — powered by technology, driven by people.</p>
+        <div class="footer-contact-item"><span>📍</span><span>PO Box 25094<br>Overland Park, KS 66225</span></div>
+        <div class="footer-contact-item"><span>📞</span><span><a href="tel:9139375577" style="color:inherit;text-decoration:none">913-937-5577</a></span></div>
+        <div class="footer-contact-item"><span>✉️</span><span><a href="mailto:info@amcencore.com" style="color:inherit;text-decoration:none">info@amcencore.com</a></span></div>
+        <div class="footer-contact-item"><span>🕐</span><span>Mon–Fri · 8:00 AM – 5:00 PM CST</span></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Encore</a></li>
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Portals</div>
+        <ul>
+          <li><a href="appraiser-portal.html">Appraiser Portal</a></li>
+          <li><a href="lender-portal.html">Lender Portal</a></li>
+          <li><a href="broker-portal.html">Broker Portal</a></li>
+          <li><a href="amc-portal.html">AMC Portal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">SMS Terms</a></li>
+          <li><a href="#">Borrower Disclosure</a></li>
+          <li><a href="mailto:compliance@amcencore.com">Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 AMC Encore. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">SMS Terms</a>
+        <a href="#">Borrower Disclosure</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver(
+      es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.07 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Animated stat counters
+    function animateCount(el, target, suffix, duration) {
+      let start = 0, startTime = null;
+      const step = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          statsObserver.unobserve(e.target);
+          const nums = e.target.querySelectorAll('.stat-number[data-count]');
+          nums.forEach(n => animateCount(n, +n.dataset.count, n.dataset.suffix || '', 1600));
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsStrip = document.querySelector('.stats-strip');
+    if (statsStrip) statsObserver.observe(statsStrip);
+  </script>
+  <!-- Tawk.to Live Chat: replace YOUR_PROPERTY_ID/YOUR_WIDGET_ID after signing up at tawk.to -->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src="https://embed.tawk.to/YOUR_PROPERTY_ID/YOUR_WIDGET_ID";
+      s1.charset="UTF-8";
+      s1.setAttribute("crossorigin","*");
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+</body>
+</html>
